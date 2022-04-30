@@ -8,6 +8,9 @@ COPY ./conf ./conf
 RUN bash ./tools/install_nginx.sh
 
 # Execute setup script
+COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 RUN bash ./conf/setup_nginx.sh
 
-EXPOSE 80 8080
+EXPOSE 443
+
+CMD ["nginx", "-g", "daemon off;"]
