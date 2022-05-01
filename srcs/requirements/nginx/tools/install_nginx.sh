@@ -13,6 +13,3 @@ apt-get install -y nginx
 
 #Install opnssl (TSL)
 apt-get install -y openssl
-
-#Create website directory
-#mkdir /var/www/localhost
