@@ -11,4 +11,6 @@ RUN bash ./tools/install_wordpress.sh
 # Configure database
 RUN bash ./conf/setup_wordpress.sh
 
+# start php7.3-fpm:
+
 EXPOSE 9000

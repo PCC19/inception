@@ -20,4 +20,4 @@ tar -xf latest.tar.gz
 rm latest.tar.gz
 
 ## Move files to site directory
-mv wordpress/ var/www/localhost/wordpress
+#mv wordpress/ var/www/localhost/wordpress
