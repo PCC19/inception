@@ -14,6 +14,7 @@ RUN bash ./conf/setup_mariadb.sh
 # CMD
 #CMD ["/usr/bin/mysqld_safe"]
 # or
-CMD ["service", "mysql", "start"]
+#CMD ["service", "mysql", "start"]
+CMD mysqld
 
 EXPOSE 3306

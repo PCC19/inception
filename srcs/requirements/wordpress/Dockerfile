@@ -12,5 +12,8 @@ RUN bash ./tools/install_wordpress.sh
 RUN bash ./conf/setup_wordpress.sh
 
 # start php7.3-fpm:
-
+#CMD ["service", "php7.3-fpm", "start"]
+#CMD ["/bin/bash"]
+RUN service php7.3-fpm start
+CMD ["tail", "-f", "/dev/null"]
 EXPOSE 9000
