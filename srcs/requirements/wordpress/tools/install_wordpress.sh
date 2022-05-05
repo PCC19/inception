@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    install_wordpress.sh                               :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pcunha <pcunha@student.42sp.org.br>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/05/05 19:39:43 by pcunha            #+#    #+#              #
+#    Updated: 2022/05/05 19:40:08 by pcunha           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #!/bin/bash
 # Make updates and upgrades
 apt-get upgrade && apt-get update
@@ -9,7 +21,7 @@ apt-get install -y vim man wget
 apt-get install -y php php-curl php-imagick php-xml php-zip php-xmlreader php-ssh2 php-gd php-fpm php-mysql php-mbstring
 
 #Create website directory
-mkdir -p /var/www/localhost
+#mkdir -p /var/www/localhost
 
 #Install wordpress
 ## dwnld tarball

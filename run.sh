@@ -1,12 +1,23 @@
 # sps -!/bin/bash
 
+# =============================================================================
 # Para container se estiverem rodando
 docker stop $(docker ps -a -q)
 # Apaga containers
 docker container rm c_mariadb c_nginx c_wordpress
 # Apaga rede
 docker network rm rede
+# Apaga volumes
+docker volume rm my_volume
 
+# =============================================================================
+# Cria rede
+docker network create rede
+
+# Cria volume
+docker volume create --driver local --name my_volume
+
+# =============================================================================
 # Faz build das imagen
 cd ~/r42/inception/srcs/requirements/mariadb/
 docker build -t i_mariadb .
@@ -18,13 +29,12 @@ docker build -t i_wordpress .
 # Gera containers na ordem
 cd ~/r42/inception/srcs/requirements/
 docker run -d -p3306:3306 --name c_mariadb i_mariadb
-docker run -d -p9000:9000 --name c_wordpress i_wordpress
-docker run -d -p443:443 --name c_nginx i_nginx
+docker run -d -p9000:9000 -v my_volume:/var/www/html/ --name c_wordpress i_wordpress
+docker run -d -p443:443 -v my_volume:/var/www/html/ --name c_nginx i_nginx
 	# Portas
 	# Volumes
 
-# Cria rede
-docker network create rede
+
 # Conecta Containers
 docker network connect rede c_mariadb
 docker network connect rede c_nginx
