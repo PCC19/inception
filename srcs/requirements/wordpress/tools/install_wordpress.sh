@@ -6,7 +6,7 @@
 #    By: pcunha <pcunha@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/05 19:39:43 by pcunha            #+#    #+#              #
-#    Updated: 2022/05/05 19:40:08 by pcunha           ###   ########.fr        #
+#    Updated: 2022/05/07 19:23:29 by pcunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ apt-get install -y vim man wget
 
 #Install php and libraries required by the other softwares
 apt-get install -y php php-curl php-imagick php-xml php-zip php-xmlreader php-ssh2 php-gd php-fpm php-mysql php-mbstring
+
+# Para debub apenas !!!
+apt-get install -y mariadb-server
 
 #Create website directory
 #mkdir -p /var/www/localhost
