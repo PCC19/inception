@@ -9,7 +9,8 @@ COPY ./conf ./conf
 RUN bash ./tools/install_mariadb.sh
 
 # Configure database
-RUN bash ./conf/setup_mariadb.sh
+#RUN bash ./conf/setup_mariadb.sh
+RUN service mysql start && mysql < ./conf/setup.sql
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # CMD
