@@ -17,6 +17,7 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 #CMD ["/usr/bin/mysqld_safe"]
 # or
 #CMD ["service", "mysql", "start"]
+RUN service mysql start
 CMD ["tail", "-f", "/dev/null"]
 #CMD mysqld
 

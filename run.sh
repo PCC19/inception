@@ -9,6 +9,7 @@ docker container rm c_mariadb c_nginx c_wordpress
 docker network rm rede
 # Apaga volumes
 docker volume rm my_volume
+docker volume rm data_volume
 
 # =============================================================================
 # Cria rede
@@ -42,10 +43,13 @@ docker network connect rede c_nginx
 docker network connect rede c_wordpress
 
 # Starta os servicos na unha
+docker exec -it c_mariadb service mysql start
 docker exec -it c_nginx service nginx start
 docker exec -it c_wordpress service php7.3-fpm start
 
 # lista os processos de cada container para ver se estao rodando
+echo -e "MARIADB:\n"
+docker top c_mariadb
 echo -e "NGINX:\n"
 docker top c_nginx
 echo -e "WORDPRESS:\n"
