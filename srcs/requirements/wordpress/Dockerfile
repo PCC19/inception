@@ -14,6 +14,7 @@ RUN bash /tmp/tools/install_wordpress.sh
 # Configure wordpress
 # Config file so php-fpm listens to 0.0.0.0:9000 in order to accepet connections from nginx
 RUN cp /tmp/conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+RUN cp /tmp/conf/wp-config.php /var/www/html/wordpress/wp-config.php
 #RUN bash /tmp/conf/setup_wordpress.sh
 
 # start php7.3-fpm:

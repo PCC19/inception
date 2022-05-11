@@ -10,3 +10,5 @@ CREATE USER 'pcunha'@'%' IDENTIFIED BY 'pcc';
 GRANT ALL PRIVILEGES ON *.* TO 'pcunha'@'localhost';
 GRANT ALL PRIVILEGES ON *.* TO 'pcunha'@'%';
 FLUSH PRIVILEGES;
+
+CREATE DATABASE IF NOT EXISTS wordpress;
