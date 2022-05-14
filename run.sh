@@ -4,11 +4,11 @@
 # Para container se estiverem rodando
 docker stop $(docker ps -a -q)
 # Apaga containers
-docker container rm c_mariadb c_nginx c_wordpress
+docker container rm mariadb nginx wordpress
 # Apaga rede
 docker network rm rede
 # Apaga volumes
-docker volume rm my_volume
+docker volume rm site_volume
 docker volume rm data_volume
 
 # =============================================================================
@@ -16,7 +16,7 @@ docker volume rm data_volume
 docker network create rede
 
 # Cria volume
-docker volume create --driver local --name my_volume
+docker volume create --driver local --name site_volume
 docker volume create --driver local --name data_volume
 
 # =============================================================================
@@ -30,28 +30,28 @@ docker build -t i_wordpress .
 
 # Gera containers na ordem
 cd ~/r42/inception/srcs/requirements/
-docker run -d -p3306:3306 -v data_volume:/var/lib/mysql --name c_mariadb i_mariadb
-docker run -d -p9000:9000 -v my_volume:/var/www/html/ --name c_wordpress i_wordpress
-docker run -d -p443:443 -v my_volume:/var/www/html/ --name c_nginx i_nginx
+docker run -d -p3306:3306 -v data_volume:/var/lib/mysql --name mariadb i_mariadb
+docker run -d -p9000:9000 -v site_volume:/var/www/html/ --name wordpress i_wordpress
+docker run -d -p443:443 -v site_volume:/var/www/html/ --name nginx i_nginx
 	# Portas
 	# Volumes
 
 
 # Conecta Containers
-docker network connect rede c_mariadb
-docker network connect rede c_nginx
-docker network connect rede c_wordpress
+docker network connect rede mariadb
+docker network connect rede nginx
+docker network connect rede wordpress
 
 # Starta os servicos na unha
-docker exec -it c_mariadb service mysql start
-docker exec -it c_nginx service nginx start
-docker exec -it c_wordpress service php7.3-fpm start
+docker exec -it mariadb service mysql start
+docker exec -it nginx service nginx start
+docker exec -it wordpress service php7.3-fpm start
 
 # lista os processos de cada container para ver se estao rodando
 echo -e "MARIADB:\n"
-docker top c_mariadb
+docker top mariadb
 echo -e "NGINX:\n"
-docker top c_nginx
+docker top nginx
 echo -e "WORDPRESS:\n"
-docker top c_wordpress
+docker top wordpress
 

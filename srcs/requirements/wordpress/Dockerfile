@@ -14,7 +14,9 @@ RUN bash /tmp/tools/install_wordpress.sh
 # Configure wordpress
 # Config file so php-fpm listens to 0.0.0.0:9000 in order to accepet connections from nginx
 RUN cp /tmp/conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+# Configuration for database access in wordpress
 RUN cp /tmp/conf/wp-config.php /var/www/html/wordpress/wp-config.php
+# WP user config is done trough sql file loading in MariaDB container (mariadb dockerfile)
 #RUN bash /tmp/conf/setup_wordpress.sh
 
 # start php7.3-fpm:

@@ -1,0 +1,67 @@
+version: "3"
+
+services:
+  mariadb:
+    build: requirements/mariadb
+    container_name: mariadb
+    volumes:
+      - data_volume:/var/lib/mysql
+    newtorks:
+      - inception_network
+    restart: always
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_ROOT_PASSWORD: imroot
+      WP_DB_NAME: wordpress
+      WP_DB_USER: pcunha
+      WP_DB_PASSWORD: pcc
+
+  wordpress:
+    depends on: mariadb
+    build: requirements/wordpress/
+    container_name: wordpress
+    volumes:
+      - site_volume:/var/www/html
+    networks:
+      - inception_newtwork
+    enviroment:
+      DOMAIN_NAME: pcunha
+      MYSQL_HOST: mariadb
+      WP_DB_NAME: wordpress
+      WP_DB_USER: pcunha
+      WP_DB_PASSWORD: pcc
+      WP_USER: pcunha_wp
+      WP_PASSWORD: pcunha_wp
+
+  nginx:
+    depends on: wordpress
+    build: requirements/nginx
+    container name: nginx
+    volumes:
+      - site_volume:/var/www/html/
+    networks:
+      - inception_network
+    ports:
+      - "443:443"
+    restart: always
+# Demais servicos vao na sequencia
+
+  volumes:
+    site_volume:
+      driver: local
+      dirver_opts:
+        type: none
+        o: bind
+        device: ${HOME}/data/inception_data/site_volume
+    data_volume:
+      driver: local
+      dirver_opts:
+        type: none
+        o: bind
+        device: ${HOME}/data/inception_data/data_volume
+
+  networks:
+    inception_network
+
+
+
