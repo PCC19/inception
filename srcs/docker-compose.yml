@@ -16,6 +16,8 @@ services:
       WP_DB_USER: pcunha
       WP_DB_PASSWORD: pcc
   wordpress:
+    depends_on:
+      - mariadb
     build: requirements/wordpress
     container_name: wordpress
     restart: always
@@ -32,6 +34,8 @@ services:
       WP_USER: pcunha_wp
       WP_PASSWORD: pcunha_wp
   nginx:
+    depends_on:
+      - wordpress
     build: requirements/nginx
     container_name: nginx
       #restart: no
