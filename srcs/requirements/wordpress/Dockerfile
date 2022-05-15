@@ -19,9 +19,8 @@ RUN cp /tmp/conf/wp-config.php /var/www/html/wordpress/wp-config.php
 # WP user config is done trough sql file loading in MariaDB container (mariadb dockerfile)
 #RUN bash /tmp/conf/setup_wordpress.sh
 
-# start php7.3-fpm:
-#CMD ["service", "php7.3-fpm", "start"]
-#CMD ["/bin/bash"]
-RUN service php7.3-fpm start
-CMD ["tail", "-f", "/dev/null"]
 EXPOSE 9000
+# start php7.3-fpm:
+# Create necessary dir so php-fpm7.3 can start. With "service php-fpm7.3 start" this dir is automaticaly created
+RUN mkdir -p /var/run/php/
+CMD ["php-fpm7.3", "-F"]

@@ -34,7 +34,7 @@ services:
   nginx:
     build: requirements/nginx
     container_name: nginx
-    restart: always
+      #restart: no
     volumes:
       - site_volume:/var/www/html
     networks:

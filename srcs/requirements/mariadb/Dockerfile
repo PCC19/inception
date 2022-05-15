@@ -17,12 +17,6 @@ RUN service mysql start && mysql -u root -pimroot -D wordpress < ./conf/wp_pcunh
 # This file will allow access to the database from outside the container
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-# CMD
-#CMD ["/usr/bin/mysqld_safe"]
-# or
-#CMD ["service", "mysql", "start"]
-RUN service mysql start
-CMD ["tail", "-f", "/dev/null"]
-#CMD mysqld
-
 EXPOSE 3306
+# CMD
+CMD ["mysqld"]
