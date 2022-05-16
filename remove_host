@@ -1,0 +1,13 @@
+#/bin/bash
+FILE=/etc/hosts
+SITE=pcunha.42.fr
+
+# coloca
+sudo chmod 666 /etc/hosts
+if grep -E $SITE $FILE
+then
+	echo "Tirando host ..."
+	sudo sed -i "" "/$SITE/d" /etc/hosts
+	echo "ok"
+fi
+sudo chmod 644 /etc/hosts

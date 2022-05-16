@@ -1,0 +1,14 @@
+#/bin/bash
+FILE=/etc/hosts
+SITE=pcunha.42.fr
+
+# coloca
+sudo chmod 666 /etc/hosts
+if grep -E $SITE $FILE
+then
+	echo "/etc/hosts ok"
+else
+	echo "adding pcunha.42.fr to /etc/hosts"
+	echo "127.0.0.1 "$SITE >> $FILE
+fi
+sudo chmod 644 /etc/hosts
