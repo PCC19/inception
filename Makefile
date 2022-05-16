@@ -1,24 +1,35 @@
-.PHONY: build buildno up down clean ps
+.PHONY: all build buildno up down clean ps
 
 YML= -f ./srcs/docker-compose.yml
+ENV= --env-file ./srcs/.env
 
-build:
-	docker compose $(YML) build
 
-buildno:
-	docker compose $(YML) build --no-cache
+VOLUMES_PATH = ${HOME}/pcunha/data
+VOLUMES_DIR = db_data site_data
+VOLUMES = $(addprefix $(VOLUMES_PATH)/, $(VOLUMES_DIR))
 
-up:
-	docker compose $(YML) up -d 
-	docker compose $(YML) ps -a
+
+$(VOLUMES):
+	mkdir -p $(VOLUMES)
+
+all: down build
+
+build: | $(VOLUMES)
+	docker compose $(YML) $(ENV) build
+
+buildno: | $(VOLUMES)
+	docker compose $(YML) $(ENV) build --no-cache
+
+up: | $(VOLUMES)
+	docker compose $(YML) $(ENV) up -d 
+	docker compose $(YML) $(ENV) ps -a
 
 down:
-	docker compose $(YML) down
+	docker compose $(YML) $(ENV) down
 
-clean:
-	docker volume rm srcs_site_volume
-	docker volume rm srcs_data_volume
+clean: down
+	docker volume rm $$(docker volume ls -q) || rm -rf data
 
 ps:
-	docker compose $(YML) ps -a
+	docker compose $(YML) $(ENV) ps -a
 
