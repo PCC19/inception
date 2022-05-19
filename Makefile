@@ -20,10 +20,10 @@ build: | $(VOLUMES)
 	echo "Building ..."
 	docker-compose $(YML) $(ENV) build
 
-buildno: | $(VOLUMES)
+re: clean | $(VOLUMES)
 	echo "Configin' /etc/hosts ..."
 	./add_host
-	echo "Building ..."
+	echo "Re Building ..."
 	docker-compose $(YML) $(ENV) build --no-cache
 
 up: | $(VOLUMES)
@@ -37,7 +37,8 @@ clean: down
 	echo "Removing site from /etc/hosts"
 	./remove_host
 	echo "Deleting volumes and data ..."
-	docker volume rm $$(docker volume ls -q) || rm -rf data
+	docker volume rm $$(docker volume ls -q)
+	rm -rf ~/home
 
 ps:
 	docker-compose $(YML) $(ENV) ps -a
