@@ -37,7 +37,9 @@ clean: down
 	echo "Removing site from /etc/hosts"
 	./remove_host
 	echo "Deleting volumes and data ..."
+	docker volume prune -f
 	docker volume rm $$(docker volume ls -q)
+	echo "Deleting volumes host directories ..."
 	rm -rf ~/home
 
 ps:
