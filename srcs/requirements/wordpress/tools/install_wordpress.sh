@@ -6,7 +6,7 @@
 #    By: pcunha <pcunha@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/05 19:39:43 by pcunha            #+#    #+#              #
-#    Updated: 2022/05/19 16:11:07 by pcunha           ###   ########.fr        #
+#    Updated: 2022/05/19 19:35:14 by pcunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ set -x
 apt-get upgrade && apt-get update
 
 #Install some tools (vim wget openssl man)
-apt-get install -y vim man wget
+apt-get install -y vim man wget mariadb-client
 
 #Install php and libraries required by the other softwares
 apt-get install -y php php-curl php-imagick php-xml php-zip php-xmlreader php-ssh2 php-gd php-fpm php-mysql php-mbstring
@@ -43,4 +43,5 @@ wp core download --allow-root
 #    --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
 #wp user create $WP_USER $WP_EMAIL --role=author --user_pass=$WP_PASSWORD --allow-root
 #wp theme install ryu --activate --allow-root
+
 

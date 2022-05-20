@@ -1,5 +1,21 @@
 version: "3"
 
+volumes:
+    database_volume:
+      name: database_volume
+      driver: local
+      driver_opts:
+        o: bind
+        type: none
+        device: ${VOL_PATH}/db_data
+    site_volume:
+      name: site_volume
+      driver: local
+      driver_opts:
+        o: bind
+        type: none
+        device: ${VOL_PATH}/site_data
+
 services:
   mariadb:
     image: mariadb
@@ -54,22 +70,6 @@ services:
       - inception_network
     ports:
       - "443:443"
-
-volumes:
-    database_volume:
-      name: database_volume
-      driver: local
-      driver_opts:
-        o: bind
-        type: none
-        device: ${VOL_PATH}/db_data
-    site_volume:
-      name: site_volume
-      driver: local
-      driver_opts:
-        o: bind
-        type: none
-        device: ${VOL_PATH}/site_data
 
 networks:
   inception_network:

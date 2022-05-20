@@ -23,18 +23,19 @@ ARG WP_PASSWORD empty
 
 # Configuration for database access in wordpress
 RUN mkdir -p /var/www/html/wordpress
-RUN cp /tmp/conf/wp-config-template.php /var/www/html/wordpress/wp-config-template.php
+RUN cp /tmp/conf/wp-config-template.php /var/www/html/input
 
 # Execute installation script
 RUN bash /tmp/tools/install_wordpress.sh
-# Expand variables inside config file
-RUN eval echo $(cat wp-config-template.php) > wp-config.php
 
 # Configure wordpress
 # Config file so php-fpm listens to 0.0.0.0:9000 in order to accepet connections from nginx
 RUN cp /tmp/conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 # WP user config is done trough sql file loading in MariaDB container (mariadb dockerfile)
-#RUN bash /tmp/conf/setup_wordpress.sh
+RUN bash /tmp/conf/setup_wordpress.sh
+# This sql file will load a sample wp with wp user and password already conf'd
+#RUN service mysql start && mysql -u $WP_DB_USER -p$WP_DB_PASSWORD -D $WP_DB_NAME < ./conf/wordpress.sql
+#RUN mysql -hmariadb -uroot -pimroot wordpress < wordpress.sql
 
 EXPOSE 9000
 # start php7.3-fpm:
