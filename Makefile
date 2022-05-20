@@ -17,6 +17,15 @@ all: down build
 build: | $(VOLUMES)
 	echo "Configin' /etc/hosts ..."
 	./add_host
+	#echo "Creating volumes ..."
+	#docker volume create --driver local \
+    #--opt type=none \
+    #--opt device=$(VOLUMES_PATH)/db_data \
+    #--opt o=bind database_volume
+	#docker volume create --driver local \
+    #--opt type=none \
+    #--opt device=$(VOLUMES_PATH)/site_data \
+    #--opt o=bind site_volume
 	echo "Building ..."
 	docker-compose $(YML) $(ENV) build
 

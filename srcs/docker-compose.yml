@@ -2,6 +2,7 @@ version: "3"
 
 volumes:
     database_volume:
+      #external: true
       name: database_volume
       driver: local
       driver_opts:
@@ -9,6 +10,7 @@ volumes:
         type: none
         device: ${VOL_PATH}/db_data
     site_volume:
+      #external: true
       name: site_volume
       driver: local
       driver_opts:

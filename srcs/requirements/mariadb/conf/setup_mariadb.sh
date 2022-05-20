@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -x
 
 echo "grant all on *.* to '"${DB_ROOT}"'@'localhost' with grant option;" >> setup.sql
