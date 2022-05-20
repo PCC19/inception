@@ -5,10 +5,10 @@ FROM debian:buster
 COPY ./tools /tmp/tools/
 COPY ./conf /tmp/conf/
 
-# Cria diretorio de trabalho onde sera instalado o WP e compartilhado com o NGINX para servir o site
+# Creates workdir where WP will be installed and shared witn NGINX to serve the site
 WORKDIR /var/www/html/
 
-# Get Environmet variables from yml ("empty: values will be overriden)
+# Get Environmet variables from yml ("empty": values will be overriden)
 ARG WP_DB_NAME empty
 ARG WP_DB_USER empty
 ARG WP_DB_PASSWORD empty
@@ -29,13 +29,8 @@ RUN cp /tmp/conf/wp-config-template.php /var/www/html/input
 RUN bash /tmp/tools/install_wordpress.sh
 
 # Configure wordpress
-# Config file so php-fpm listens to 0.0.0.0:9000 in order to accepet connections from nginx
-RUN cp /tmp/conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 # WP user config is done trough sql file loading in MariaDB container (mariadb dockerfile)
 RUN bash /tmp/conf/setup_wordpress.sh
-# This sql file will load a sample wp with wp user and password already conf'd
-#RUN service mysql start && mysql -u $WP_DB_USER -p$WP_DB_PASSWORD -D $WP_DB_NAME < ./conf/wordpress.sql
-#RUN mysql -hmariadb -uroot -pimroot wordpress < wordpress.sql
 
 EXPOSE 9000
 # start php7.3-fpm:

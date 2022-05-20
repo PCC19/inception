@@ -6,7 +6,7 @@
 #    By: pcunha <pcunha@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/05 19:39:43 by pcunha            #+#    #+#              #
-#    Updated: 2022/05/19 19:35:14 by pcunha           ###   ########.fr        #
+#    Updated: 2022/05/20 00:39:58 by pcunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,5 +43,3 @@ wp core download --allow-root
 #    --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
 #wp user create $WP_USER $WP_EMAIL --role=author --user_pass=$WP_PASSWORD --allow-root
 #wp theme install ryu --activate --allow-root
-
-

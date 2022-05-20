@@ -12,7 +12,6 @@ nvim -p Makefile ./srcs/docker-compose.yml \
 	./srcs/requirements/nginx/conf/nginx.conf  \
 	./srcs/requirements/wordpress/Dockerfile \
 	./srcs/requirements/wordpress/tools/install_wordpress.sh  \
-	./srcs/requirements/wordpress/tools/install_wordpress.sh  \
 	./srcs/requirements/wordpress/conf/setup_wordpress.sh  \
 	./srcs/requirements/wordpress/conf/www.conf \
 	./srcs/requirements/wordpress/conf/wp-config-template.php \
