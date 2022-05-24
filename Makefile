@@ -16,7 +16,7 @@ all: down build
 
 build: | $(VOLUMES)
 	echo "Configin' /etc/hosts ..."
-	./add_host
+	bash ./add_host
 	#echo "Creating volumes ..."
 	#docker volume create --driver local \
     #--opt type=none \
@@ -31,7 +31,7 @@ build: | $(VOLUMES)
 
 re: clean | $(VOLUMES)
 	echo "Configin' /etc/hosts ..."
-	./add_host
+	bash ./add_host
 	echo "Re Building ..."
 	docker-compose $(YML) $(ENV) build --no-cache
 
@@ -44,14 +44,14 @@ down:
 
 clean: down
 	echo "Removing site from /etc/hosts"
-	./remove_host
+	bash ./remove_host
 	echo "Deleting volumes and data ..."
 	docker system prune -f -a --volumes
 	docker volume rm database_volume -f
 	docker volume rm site_volume -f
 #	#docker volume rm $$(docker volume ls -q)
 	echo "Deleting volumes host directories ..."
-	rm -rf ~/home
+	sudo rm -rf ~/home
 
 ps:
 	docker-compose $(YML) $(ENV) ps -a

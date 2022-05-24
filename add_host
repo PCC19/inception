@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/bash
+set +x
 FILE=/etc/hosts
 SITE=pcunha.42.fr
 

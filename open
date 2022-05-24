@@ -1,20 +1,13 @@
-#!/bin/bash
+#!/usr/bin/bash
 
-nvim -p Makefile ./srcs/docker-compose.yml \
-	./srcs/.env \
-	./srcs/requirements/mariadb/Dockerfile  \
-	./srcs/requirements/tools/mariadb/install_mariadb.sh  \
-	./srcs/requirements/mariadb/conf/setup_mariadb.sh  \
-	./srcs/requirements/mariadb/conf/50-server.conf  \
-	./srcs/requirements/nginx/Dockerfile  \
-	./srcs/requirements/nginx/tools/Dockerfile/install_nginx.sh  \
-	./srcs/requirements/nginx/conf/setup_nginx.sh  \
-	./srcs/requirements/nginx/conf/nginx.conf  \
-	./srcs/requirements/wordpress/Dockerfile \
-	./srcs/requirements/wordpress/tools/install_wordpress.sh  \
-	./srcs/requirements/wordpress/conf/setup_wordpress.sh  \
-	./srcs/requirements/wordpress/conf/www.conf \
-	./srcs/requirements/wordpress/conf/wp-config-template.php \
- \
-
-
+vim -p Makefile ./srcs/docker-compose.yml \
+	./srcs/requirements/wordpress/Dockerfile\
+	./srcs/requirements/wordpress/tools/install_wordpress.sh\
+	./srcs/requirements/wordpress/conf/setup_wordpress.sh\
+	./srcs/requirements/mariadb/Dockerfile\
+	./srcs/requirements/mariadb/tools/install_mariadb.sh\
+	./srcs/requirements/mariadb/conf/setup_mariadb.sh\
+	./srcs/requirements/nginx/Dockerfile\
+	./srcs/requirements/nginx/tools/install_nginx.sh\
+	./srcs/requirements/nginx/conf/setup_nginx.sh\
+	./srcs/requirements/nginx/conf/nginx.conf\
