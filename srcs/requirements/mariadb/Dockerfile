@@ -21,7 +21,7 @@ RUN ./conf/setup_mariadb.sh
 # This sql file will setup 2 database users (root and db_user)
 RUN service mysql start && mysql < setup.sql
 # This sql file will setup 2 users for wp (wp_root and pcunha)
-#RUN service mysql start && mysql -u$DB_ROOT -p$DB_ROOT_PASSWORD -D$DB_NAME < /conf/wordpress.sql
+RUN service mysql start && mysql -u$DB_ROOT -p$DB_ROOT_PASSWORD -D$DB_NAME < /conf/wordpress.sql
 # This file will allow access to the database from outside the container
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
