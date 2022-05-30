@@ -47,7 +47,7 @@ services:
     depends_on:
       - wordpress
     build: requirements/nginx
-      #restart: no
+    restart: always
     volumes:
       - site_volume:/var/www/html
     networks:

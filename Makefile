@@ -1,35 +1,26 @@
-.PHONY: all build buildno up down clean ps
+.PHONY: all build buildno up down clean fclean ps
 
 YML= -f ./srcs/docker-compose.yml
 ENV= --env-file ./srcs/.env
 
 
-VOLUMES_PATH = ${HOME}/home/pcunha/data
+VOLUMES_PATH = /home/pcunha/data
 VOLUMES_DIR = db_data site_data
 VOLUMES = $(addprefix $(VOLUMES_PATH)/, $(VOLUMES_DIR))
 
 
-$(VOLUMES):
-	mkdir -p $(VOLUMES)
-
 all: down build
+
+$(VOLUMES):
+	sudo mkdir -p $(VOLUMES)
 
 build: | $(VOLUMES)
 	echo "Configin' /etc/hosts ..."
 	bash ./add_host
-	#echo "Creating volumes ..."
-	#docker volume create --driver local \
-    #--opt type=none \
-    #--opt device=$(VOLUMES_PATH)/db_data \
-    #--opt o=bind database_volume
-	#docker volume create --driver local \
-    #--opt type=none \
-    #--opt device=$(VOLUMES_PATH)/site_data \
-    #--opt o=bind site_volume
 	echo "Building ..."
 	docker-compose $(YML) $(ENV) build
 
-re: clean | $(VOLUMES)
+re: fclean | $(VOLUMES)
 	echo "Configin' /etc/hosts ..."
 	bash ./add_host
 	echo "Re Building ..."
@@ -42,16 +33,23 @@ up: | $(VOLUMES)
 down:
 	docker-compose $(YML) $(ENV) down
 
-clean: down
+fclean: down
 	echo "Removing site from /etc/hosts"
 	bash ./remove_host
-	echo "Deleting volumes and data ..."
+	echo "Docker pruning ..."
 	docker system prune -f -a --volumes
+	echo "Deleting volumes and data ..."
 	docker volume rm database_volume -f
 	docker volume rm site_volume -f
-#	#docker volume rm $$(docker volume ls -q)
 	echo "Deleting volumes host directories ..."
-	sudo rm -rf ~/home
+	sudo rm -rf $(VOLUMES_PATH)
+
+clean: down
+	echo "Deleting volumes and data ..."
+	docker volume rm database_volume -f
+	docker volume rm site_volume -f
+	echo "Deleting volumes host directories ..."
+	sudo rm -rf $(VOLUMES_PATH)
 
 ps:
 	docker-compose $(YML) $(ENV) ps -a
