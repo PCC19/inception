@@ -5,12 +5,9 @@ FROM debian:buster
 COPY ./tools ./tools
 COPY ./conf ./conf
 
-# Execute installation script
-RUN bash ./tools/install_nginx.sh
-
-# Execute setup script
-COPY ./conf/nginx.conf /etc/nginx/sites-available/default
-RUN bash ./conf/setup_nginx.sh
+# Execute installation && setup scripts
+RUN bash ./tools/install_nginx.sh && \
+	bash ./conf/setup_nginx.sh
 
 EXPOSE 443
 
