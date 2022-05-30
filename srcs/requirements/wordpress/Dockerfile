@@ -33,6 +33,7 @@ RUN bash /tmp/tools/install_wordpress.sh
 RUN bash /tmp/conf/setup_wordpress.sh
 
 EXPOSE 9000
+
 # start php7.3-fpm:
 # Create necessary dir so php-fpm7.3 can start. With "service php-fpm7.3 start" this dir is automaticaly created
 RUN mkdir -p /var/run/php/

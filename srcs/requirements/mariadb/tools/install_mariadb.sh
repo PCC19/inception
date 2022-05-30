@@ -8,3 +8,4 @@ apt-get install -y vim man procps
 
 #Install MariaDB
 apt-get install -y mariadb-server
+

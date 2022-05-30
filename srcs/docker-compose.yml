@@ -6,12 +6,12 @@ services:
     container_name: mariadb
     build:
       context: requirements/mariadb
-      args:
-        - DB_ROOT=${DB_ROOT}
-        - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-        - DB_USER=${DB_USER}
-        - DB_USER_PASSWORD=${DB_USER_PASSWORD}
-        - DB_NAME=${DB_NAME}
+    environment:
+      - DB_ROOT=${DB_ROOT}
+      - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - DB_USER=${DB_USER}
+      - DB_USER_PASSWORD=${DB_USER_PASSWORD}
+      - DB_NAME=${DB_NAME}
     restart: always
     volumes:
       - database_volume:/var/lib/mysql

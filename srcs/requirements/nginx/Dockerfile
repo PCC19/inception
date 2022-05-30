@@ -14,5 +14,5 @@ RUN bash ./conf/setup_nginx.sh
 
 EXPOSE 443
 
-#CMD ["tail", "-f", "/dev/null"]
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
